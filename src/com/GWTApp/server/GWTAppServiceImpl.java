@@ -30,4 +30,19 @@ public class GWTAppServiceImpl extends RemoteServiceServlet implements GWTAppSer
         return persons;
     }
 
+    public Person findPerson(int id)
+    {
+        return persons.get(id);
+    }
+
+    public ArrayList<Person> editPerson(int id, String name, String surname, String email, int phone)
+    {
+        persons.get(id).setName(name);
+        persons.get(id).setSurname(surname);
+        persons.get(id).setEmail(email);
+        persons.get(id).setPhone(phone);
+
+        return persons;
+    }
+
 }

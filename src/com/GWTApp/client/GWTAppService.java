@@ -9,9 +9,9 @@ import java.util.ArrayList;
 @RemoteServiceRelativePath("GWTAppService")
 public interface GWTAppService extends RemoteService {
     // Sample interface method of remote interface
-    String getMessage(String msg);
     ArrayList<Person> getPersons();
     Person addPerson(Person p);
+    ArrayList<Person> deletePerson(int id);
 
     /**
      * Utility/Convenience class.

@@ -24,6 +24,7 @@ public class GWTApp implements EntryPoint {
 
     final Button add = new Button("Dodaj");
 
+
     public void onModuleLoad() {
 
         GWTAppService.App.getInstance().getPersons(new getPersonsCallback());
@@ -32,7 +33,7 @@ public class GWTApp implements EntryPoint {
             @Override
             public void onClick(ClickEvent event) {
                 Person p = new Person(name.getValue(), surname.getValue(), email.getValue(), Integer.parseInt(phone.getValue()));
-                GWTAppService.App.getInstance().addPerson(p, new addCallback() );
+                GWTAppService.App.getInstance().addPerson(p, new addCallback());
             }
         });
 
@@ -63,8 +64,6 @@ public class GWTApp implements EntryPoint {
         public void onFailure(Throwable caught) {
 
         }
-
-
     }
 
     private class addCallback implements AsyncCallback<Person> {
@@ -79,28 +78,62 @@ public class GWTApp implements EntryPoint {
         }
     }
 
+    private class deleteCallback implements AsyncCallback<ArrayList<Person>> {
+
+        @Override
+        public void onSuccess(ArrayList<Person> result) {
+            addPersonsToView(result);
+        }
+        @Override
+        public void onFailure(Throwable caught) {
+
+        }
+
+
+    }
+
     public void addPersonsToView(ArrayList<Person> persons)
     {
-        table.clear();
+        table.removeAllRows();
         for(int i = 0; i<persons.size(); i++)
         {
+            final int temp = i;
             Person p =  persons.get(i);
+
+            Button delete = new Button("Usuń");
+
+            delete.addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(ClickEvent event) {
+                    GWTAppService.App.getInstance().deletePerson(temp, new deleteCallback());
+                }
+            });
 
             table.setText(i, 0, p.getName());
             table.setText(i, 1, p.getSurname());
             table.setText(i, 2, p.getEmail());
             table.setText(i, 3, String.valueOf((p.getPhone())));
+            table.setWidget(i, 4, delete);
         }
     }
 
     public void addPersonToView(Person p)
     {
-        int rowCount = table.getRowCount();
+        final int rowCount = table.getRowCount();
+        Button delete = new Button("Usuń");
+
+        delete.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                GWTAppService.App.getInstance().deletePerson(rowCount, new deleteCallback());
+            }
+        });
 
         table.setText(rowCount, 0, p.getName());
         table.setText(rowCount, 1, p.getSurname());
         table.setText(rowCount, 2, p.getEmail());
         table.setText(rowCount, 3, String.valueOf((p.getPhone())));
+        table.setWidget(rowCount, 4, delete);
 
     }
 }

@@ -24,4 +24,10 @@ public class GWTAppServiceImpl extends RemoteServiceServlet implements GWTAppSer
         return p;
     }
 
+    public ArrayList<Person> deletePerson(int id)
+    {
+        persons.remove(id);
+        return persons;
+    }
+
 }

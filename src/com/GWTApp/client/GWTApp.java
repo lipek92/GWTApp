@@ -21,6 +21,11 @@ public class GWTApp implements EntryPoint {
 
     final FlexTable table = new FlexTable();
 
+    final Label nameLabel = new Label("Imie");
+    final Label surnameLabel = new Label("Nazwisko");
+    final Label emailLabel = new Label("Email");
+    final Label phoneLabel = new Label("Telefon");
+
     final TextBox name = new TextBox();
     final TextBox surname = new TextBox();
     final TextBox email = new TextBox();
@@ -65,10 +70,13 @@ public class GWTApp implements EntryPoint {
         // to hard-code IDs.  Instead, you could, for example, search for all
         // elements with a particular CSS class and replace them with widgets.
         //
-
+        RootPanel.get("slot1").add(nameLabel);
         RootPanel.get("slot1").add(name);
+        RootPanel.get("slot1").add(surnameLabel);
         RootPanel.get("slot1").add(surname);
+        RootPanel.get("slot1").add(emailLabel);
         RootPanel.get("slot1").add(email);
+        RootPanel.get("slot1").add(phoneLabel);
         RootPanel.get("slot1").add(phone);
         RootPanel.get("slot1").add(add);
         RootPanel.get("slot1").add(agree);
@@ -153,6 +161,14 @@ public class GWTApp implements EntryPoint {
     {
         table.removeAllRows();
 
+        table.setText(0, 0, "Imie");
+        table.setText(0, 1, "Nazwisko");
+        table.setText(0, 2, "Email");
+        table.setText(0, 3, "Telefon");
+        table.setText(0, 4, "Usun");
+        table.setText(0, 5, "Edytuj");
+
+
         for(int i = 0; i<persons.size(); i++)
         {
             final int temp = i;
@@ -186,12 +202,12 @@ public class GWTApp implements EntryPoint {
                 }
             });
 
-            table.setText(i, 0, p.getName());
-            table.setText(i, 1, p.getSurname());
-            table.setText(i, 2, p.getEmail());
-            table.setText(i, 3, String.valueOf((p.getPhone())));
-            table.setWidget(i, 4, delete);
-            table.setWidget(i, 5, edit);
+            table.setText(i+1, 0, p.getName());
+            table.setText(i+1, 1, p.getSurname());
+            table.setText(i+1, 2, p.getEmail());
+            table.setText(i+1, 3, String.valueOf((p.getPhone())));
+            table.setWidget(i+1, 4, delete);
+            table.setWidget(i+1, 5, edit);
         }
     }
 

@@ -2,6 +2,8 @@ package com.GWTApp.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.*;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -9,6 +11,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -63,7 +66,6 @@ public class GWTApp implements EntryPoint {
         // elements with a particular CSS class and replace them with widgets.
         //
 
-
         RootPanel.get("slot1").add(name);
         RootPanel.get("slot1").add(surname);
         RootPanel.get("slot1").add(email);
@@ -83,7 +85,7 @@ public class GWTApp implements EntryPoint {
         }
         @Override
         public void onFailure(Throwable caught) {
-
+            Window.alert("Błąd podczas pobierania danych z serwera!");
         }
     }
 
@@ -95,7 +97,7 @@ public class GWTApp implements EntryPoint {
         }
         @Override
         public void onFailure(Throwable caught) {
-
+            Window.alert("Błąd podczas dodawania!");
         }
     }
 
@@ -109,7 +111,7 @@ public class GWTApp implements EntryPoint {
         }
         @Override
         public void onFailure(Throwable caught) {
-
+            Window.alert("Błąd podczas usuwania!");
         }
     }
 
@@ -125,7 +127,7 @@ public class GWTApp implements EntryPoint {
 
         @Override
         public void onFailure(Throwable caught) {
-
+            Window.alert("Błąd podczas edycji!");
         }
     }
 
@@ -143,7 +145,7 @@ public class GWTApp implements EntryPoint {
 
         @Override
         public void onFailure(Throwable caught) {
-
+            Window.alert("Błąd podczas wyszukiwania!");
         }
     }
 

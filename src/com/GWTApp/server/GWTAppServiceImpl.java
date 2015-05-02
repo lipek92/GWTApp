@@ -8,10 +8,6 @@ import java.util.ArrayList;
 
 public class GWTAppServiceImpl extends RemoteServiceServlet implements GWTAppService {
     // Implementation of sample interface method
-    public String getMessage(String msg) {
-        return "Client said: \"" + msg + "\"<br>Server answered: \"Hi!\"";
-    }
-
     private ArrayList<Person> persons = new ArrayList<Person>();
 
     public ArrayList<Person> getPersons() {

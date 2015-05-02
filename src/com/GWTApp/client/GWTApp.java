@@ -1,6 +1,7 @@
 package com.GWTApp.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -25,7 +26,7 @@ public class GWTApp implements EntryPoint {
     final Button add = new Button("Dodaj");
     final Button agree = new Button("Modyfikuj");
     final Button clean = new Button("Wyczyść");
-
+    HandlerRegistration handler;
 
     public void onModuleLoad() {
 
@@ -43,6 +44,13 @@ public class GWTApp implements EntryPoint {
             @Override
             public void onClick(ClickEvent event) {
                 cleanTextFields();
+            }
+        });
+
+        handler = agree.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+
             }
         });
 
@@ -96,6 +104,8 @@ public class GWTApp implements EntryPoint {
         @Override
         public void onSuccess(ArrayList<Person> result) {
             addPersonsToView(result);
+            add.setEnabled(true);
+            agree.setEnabled(false);
         }
         @Override
         public void onFailure(Throwable caught) {
@@ -140,6 +150,7 @@ public class GWTApp implements EntryPoint {
     public void addPersonsToView(ArrayList<Person> persons)
     {
         table.removeAllRows();
+
         for(int i = 0; i<persons.size(); i++)
         {
             final int temp = i;
@@ -156,14 +167,13 @@ public class GWTApp implements EntryPoint {
 
                     add.setEnabled(false);
 
-                    agree.addClickHandler(new ClickHandler() {
+                    handler.removeHandler();
+                    handler = agree.addClickHandler(new ClickHandler() {
                         @Override
                         public void onClick(ClickEvent event) {
                             GWTAppService.App.getInstance().editPerson(temp, name.getText(), surname.getText(), email.getText(), Integer.parseInt(phone.getText()), new editCallback());
                         }
                     });
-
-
                 }
             });
 

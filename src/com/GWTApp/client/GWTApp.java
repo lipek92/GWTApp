@@ -79,11 +79,11 @@ public class GWTApp implements EntryPoint {
         }
     }
 
-    private class addCallback implements AsyncCallback<Person> {
+    private class addCallback implements AsyncCallback<ArrayList<Person>> {
 
         @Override
-        public void onSuccess(Person result) {
-            addPersonToView(result);
+        public void onSuccess(ArrayList<Person> result) {
+            addPersonsToView(result);
         }
         @Override
         public void onFailure(Throwable caught) {
@@ -183,46 +183,46 @@ public class GWTApp implements EntryPoint {
         }
     }
 
-    public void addPersonToView(Person p)
-    {
-        final int rowCount = table.getRowCount();
-        Button delete = new Button("Usuń");
-        Button edit = new Button("Edytuj");
-
-        delete.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                GWTAppService.App.getInstance().deletePerson(rowCount, new deleteCallback());
-            }
-        });
-
-        edit.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-
-                GWTAppService.App.getInstance().findPerson(rowCount, new findCallback());
-
-                add.setEnabled(false);
-
-                agree.addClickHandler(new ClickHandler() {
-                    @Override
-                    public void onClick(ClickEvent event) {
-                        GWTAppService.App.getInstance().editPerson(rowCount, name.getText(), surname.getText(), email.getText(), Integer.parseInt(phone.getText()), new editCallback());
-                    }
-                });
-
-
-            }
-        });
-
-        table.setText(rowCount, 0, p.getName());
-        table.setText(rowCount, 1, p.getSurname());
-        table.setText(rowCount, 2, p.getEmail());
-        table.setText(rowCount, 3, String.valueOf((p.getPhone())));
-        table.setWidget(rowCount, 4, delete);
-        table.setWidget(rowCount, 5, edit);
-
-    }
+//    public void addPersonToView(Person p)
+//    {
+//        final int rowCount = table.getRowCount();
+//        Button delete = new Button("Usuń");
+//        Button edit = new Button("Edytuj");
+//
+//        delete.addClickHandler(new ClickHandler() {
+//            @Override
+//            public void onClick(ClickEvent event) {
+//                GWTAppService.App.getInstance().deletePerson(rowCount, new deleteCallback());
+//            }
+//        });
+//
+//        edit.addClickHandler(new ClickHandler() {
+//            @Override
+//            public void onClick(ClickEvent event) {
+//
+//                GWTAppService.App.getInstance().findPerson(rowCount, new findCallback());
+//
+//                add.setEnabled(false);
+//
+//                agree.addClickHandler(new ClickHandler() {
+//                    @Override
+//                    public void onClick(ClickEvent event) {
+//                        GWTAppService.App.getInstance().editPerson(rowCount, name.getText(), surname.getText(), email.getText(), Integer.parseInt(phone.getText()), new editCallback());
+//                    }
+//                });
+//
+//
+//            }
+//        });
+//
+//        table.setText(rowCount, 0, p.getName());
+//        table.setText(rowCount, 1, p.getSurname());
+//        table.setText(rowCount, 2, p.getEmail());
+//        table.setText(rowCount, 3, String.valueOf((p.getPhone())));
+//        table.setWidget(rowCount, 4, delete);
+//        table.setWidget(rowCount, 5, edit);
+//
+//    }
 
     public void cleanTextFields()
     {

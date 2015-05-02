@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public interface GWTAppService extends RemoteService {
     // Sample interface method of remote interface
     ArrayList<Person> getPersons();
-    Person addPerson(Person p);
+    ArrayList<Person> addPerson(Person p);
     ArrayList<Person> deletePerson(int id);
     Person findPerson(int id);
     ArrayList<Person> editPerson(int id, String name, String surname, String email, int phone);
